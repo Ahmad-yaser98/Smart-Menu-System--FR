@@ -1,0 +1,20 @@
+@import "tailwindcss";
+
+@media print {
+  /* إخفاء كل شي ما عدا الفاتورة */
+  body > * { display: none !important; }
+  .print-area { display: block !important; }
+
+  /* إخفاء السايدبار والهيدر */
+  aside, header, nav, button { display: none !important; }
+
+  /* تنسيق الفاتورة */
+  .print-area {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+  }
+}
