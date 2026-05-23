@@ -54,11 +54,15 @@ export default function Landing() {
 
       {/* ===== HERO ===== */}
       <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-        <img
-          src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80"
-          alt="Restaurant"
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
           className="absolute inset-0 w-full h-full object-cover"
-        />
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
         <div className="absolute inset-0 bg-[#1E1410]/50"></div>
         <div className="relative z-10 text-center px-6 max-w-3xl">
           <h1 className="text-5xl md:text-6xl font-semibold text-white mb-4 leading-tight">
