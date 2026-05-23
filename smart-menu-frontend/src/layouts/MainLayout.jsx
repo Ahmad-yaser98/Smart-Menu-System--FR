@@ -81,18 +81,17 @@ function MainLayout({ children }) {
 
       {/* Sidebar */}
       <aside className={`
-        fixed md:static inset-y-0 ${isAr ? 'right-0' : 'left-0'} z-50
+        fixed md:static inset-y-0 start-0 z-50
         ${collapsed ? 'w-16' : 'w-56'} 
-        ${isMobileOpen ? 'translate-x-0' : (isAr ? 'translate-x-full md:translate-x-0' : '-translate-x-full md:translate-x-0')}
-        bg-[#1E1410] flex flex-col transition-all duration-300 flex-shrink-0
+        ${isMobileOpen ? 'flex' : 'hidden md:flex'}
+        bg-[#1E1410] flex-col transition-all duration-300 flex-shrink-0
       `}>
 
         {/* Logo */}
         <div className="flex items-center justify-between px-4 py-5 border-b border-[#2E2420] h-16">
           {!collapsed && (
-            <div className="flex items-center gap-2">
-              <img src="/logo.png" alt="RestoHub Logo" className="h-8 w-auto object-contain bg-white rounded-full p-1" />
-              <span className="text-white font-semibold text-sm">RestoHub</span>
+            <div className="flex items-center justify-center w-full">
+              <img src="/logo.png" alt="RestoHub Logo" className="h-10 w-auto object-contain bg-white rounded-full p-1" />
             </div>
           )}
           <button
