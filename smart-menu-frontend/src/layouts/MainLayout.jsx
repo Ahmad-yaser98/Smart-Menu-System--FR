@@ -15,6 +15,8 @@ import {
   IconChevronLeft,
   IconChevronRight,
   IconQrcode,
+  IconMenu2,
+  IconX,
 } from '@tabler/icons-react'
 
 
@@ -45,6 +47,7 @@ function MainLayout({ children }) {
   const { t, i18n } = useTranslation()
   const navigate = useNavigate()
   const [collapsed, setCollapsed] = useState(false)
+  const [isMobileOpen, setIsMobileOpen] = useState(false)
   const isAr = i18n.language === 'ar'
 
   const toggleLang = () => {
@@ -68,23 +71,44 @@ function MainLayout({ children }) {
   return (
     <div className="flex min-h-screen bg-[#F8F7F4]">
 
+      {/* Mobile Overlay */}
+      {isMobileOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          onClick={() => setIsMobileOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className={`${collapsed ? 'w-16' : 'w-56'} bg-[#1E1410] flex flex-col transition-all duration-300 flex-shrink-0`}>
+      <aside className={`
+        fixed md:static inset-y-0 ${isAr ? 'right-0' : 'left-0'} z-50
+        ${collapsed ? 'w-16' : 'w-56'} 
+        ${isMobileOpen ? 'translate-x-0' : (isAr ? 'translate-x-full md:translate-x-0' : '-translate-x-full md:translate-x-0')}
+        bg-[#1E1410] flex flex-col transition-all duration-300 flex-shrink-0
+      `}>
 
         {/* Logo */}
-        <div className="flex items-center justify-between px-4 py-5 border-b border-[#2E2420]">
+        <div className="flex items-center justify-between px-4 py-5 border-b border-[#2E2420] h-16">
           {!collapsed && (
             <div className="flex items-center gap-2">
-              <IconToolsKitchen2 size={20} className="text-[#D95F2B]" />
+              <img src="/logo.png" alt="RestoHub Logo" className="h-8 w-auto object-contain bg-white rounded-full p-1" />
               <span className="text-white font-semibold text-sm">RestoHub</span>
             </div>
           )}
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className="text-[#F0E8E0] hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
+            className="hidden md:flex text-[#F0E8E0] hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
           >
             <CollapseIcon size={16} />
           </button>
+          {isMobileOpen && (
+            <button
+              onClick={() => setIsMobileOpen(false)}
+              className="md:hidden text-[#F0E8E0] hover:text-white p-1 rounded-lg hover:bg-white/10 transition-colors"
+            >
+              <IconX size={20} />
+            </button>
+          )}
         </div>
 
         {/* Nav Items */}
@@ -154,13 +178,21 @@ function MainLayout({ children }) {
       </aside>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex-1 flex flex-col min-w-0 w-full overflow-hidden">
 
         {/* Top Bar */}
-        <header className="bg-white border-b border-[#E5E3DE] px-6 py-3.5 flex items-center justify-between flex-shrink-0">
-          <h1 className="text-[#111110] font-semibold text-base">
-            {t(items.find(i => i.path === window.location.pathname)?.label || 'dashboard')}
-          </h1>
+        <header className="bg-white border-b border-[#E5E3DE] px-4 md:px-6 py-3.5 flex items-center justify-between flex-shrink-0 h-16">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIsMobileOpen(true)}
+              className="md:hidden text-[#111110] hover:bg-gray-100 p-1.5 rounded-lg transition-colors"
+            >
+              <IconMenu2 size={20} />
+            </button>
+            <h1 className="text-[#111110] font-semibold text-base">
+              {t(items.find(i => i.path === window.location.pathname)?.label || 'dashboard')}
+            </h1>
+          </div>
           <div className="flex items-center gap-3">
             <span className="text-xs text-[#8A8785] capitalize bg-[#FBF0EB] text-[#D95F2B] px-3 py-1 rounded-full font-medium">
               {role}

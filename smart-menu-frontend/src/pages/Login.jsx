@@ -49,9 +49,7 @@ navigate(roleHome[data.user.role] || '/')
 
       {/* الجانب الأيسر - الهوية */}
       <div className="hidden lg:flex w-1/2 bg-[#1E1410] flex-col items-center justify-center gap-6">
-        <div className="bg-[#D95F2B] p-5 rounded-2xl">
-          <IconToolsKitchen2 size={48} color="white" />
-        </div>
+        <img src="/logo.png" alt="RestoHub Logo" className="w-40 h-auto object-contain bg-white rounded-full p-3" />
         <h1 className="text-white text-4xl font-semibold">RestoHub</h1>
         <p className="text-[#F0E8E0] text-sm opacity-70">
           {isAr ? 'نظام إدارة المطعم الذكي' : 'Intelligent Restaurant Management'}

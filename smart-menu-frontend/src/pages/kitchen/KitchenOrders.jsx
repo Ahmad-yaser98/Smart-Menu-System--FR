@@ -175,7 +175,14 @@ function KitchenOrders() {
           </p>
         </div>
         <button
-          onClick={() => setSound(!sound)}
+          onClick={() => {
+            const nextSound = !sound
+            setSound(nextSound)
+            if (nextSound && bellRef.current) {
+              // Play once on user interaction to unlock audio context in browsers
+              bellRef.current.play().catch(() => {})
+            }
+          }}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg border text-sm font-medium transition-colors ${
             sound
               ? 'border-[#D95F2B] text-[#D95F2B] bg-[#FBF0EB]'
@@ -187,9 +194,9 @@ function KitchenOrders() {
       </div>
 
       {/* Kanban */}
-      <div className="grid grid-cols-3 gap-4 flex-1 overflow-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1 overflow-y-auto md:overflow-hidden pb-4 md:pb-0">
         {columns.map(col => (
-          <div key={col.key} className={`rounded-xl border ${col.bg} ${col.border} flex flex-col overflow-hidden`}>
+          <div key={col.key} className={`rounded-xl border ${col.bg} ${col.border} flex flex-col min-h-[400px] md:min-h-0 overflow-hidden`}>
 
             {/* Column Header */}
             <div className="px-4 py-3 flex items-center justify-between border-b border-white/50">

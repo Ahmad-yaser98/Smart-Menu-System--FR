@@ -35,9 +35,7 @@ export default function Landing() {
       <nav className="fixed top-0 w-full z-50 bg-white border-b border-[#E5E3DE]">
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[#D95F2B] rounded-lg flex items-center justify-center">
-              <IconToolsKitchen2 size={18} color="white" />
-            </div>
+            <img src="/logo.png" alt="RestoHub Logo" className="h-10 w-auto object-contain" />
             <span className="font-semibold text-[#111110]">RestoHub</span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm text-[#4A4845]">
@@ -233,9 +231,7 @@ export default function Landing() {
       <footer className="bg-[#1E1410] py-10">
         <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[#D95F2B] rounded-lg flex items-center justify-center">
-              <IconToolsKitchen2 size={18} color="white" />
-            </div>
+            <img src="/logo.png" alt="RestoHub Logo" className="h-10 w-auto object-contain bg-white rounded-full p-1" />
             <span className="text-white font-semibold">RestoHub</span>
           </div>
           <p className="text-[#F0E8E0] text-xs opacity-50">
