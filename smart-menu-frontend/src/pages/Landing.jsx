@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
   IconToolsKitchen2, IconMapPin, IconPhone, IconMail,
   IconClock, IconArmchair, IconQrcode, IconSalad,
@@ -24,9 +24,32 @@ const steps = [
 ]
 
 export default function Landing() {
+  const [videoFinished, setVideoFinished] = useState(false)
   const menuRef = useRef(null)
 
   const scrollToMenu = () => menuRef.current?.scrollIntoView({ behavior: 'smooth' })
+
+  if (!videoFinished) {
+    return (
+      <div className="fixed inset-0 bg-[#1E1410] z-[9999] flex flex-col items-center justify-center">
+        <video
+          autoPlay
+          muted
+          playsInline
+          onEnded={() => setVideoFinished(true)}
+          className="w-full h-full object-cover"
+        >
+          <source src="/hero-video.mp4" type="video/mp4" />
+        </video>
+        <button
+          onClick={() => setVideoFinished(true)}
+          className="absolute bottom-10 px-6 py-2 bg-white/20 hover:bg-white/30 text-white rounded-full backdrop-blur-md transition-colors border border-white/30 text-sm font-medium"
+        >
+          Skip Intro
+        </button>
+      </div>
+    )
+  }
 
   return (
     <div className="font-sans text-[#111110]">
@@ -54,15 +77,11 @@ export default function Landing() {
 
       {/* ===== HERO ===== */}
       <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
+        <img
+          src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=80"
+          alt="Restaurant"
           className="absolute inset-0 w-full h-full object-cover"
-        >
-          <source src="/hero-video.mp4" type="video/mp4" />
-        </video>
+        />
         <div className="absolute inset-0 bg-[#1E1410]/50"></div>
         <div className="relative z-10 text-center px-6 max-w-3xl">
           <h1 className="text-5xl md:text-6xl font-semibold text-white mb-4 leading-tight">
